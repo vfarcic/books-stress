@@ -16,7 +16,7 @@ class Books extends Simulation {
 
   val scn = scenario("books")
     .exec(
-      http("post")
+      http("books-post")
         .put("/api/v1/books")
         .body(StringBody(
           """{
@@ -28,9 +28,25 @@ class Books extends Simulation {
         .asJSON
     )
     .pause(2)
+    .exec(
+      http("books-get")
+        .get("http://localhost:8080/api/v1/books")
+        .asJSON
+    )
+    .pause(2)
+    .exec(
+      http("books-get-by-id")
+        .get("http://localhost:8080/api/v1/books/_id/99999")
+        .asJSON
+    )
 
-  setUp(scn.inject(rampUsers(users) over (usersOverSeconds seconds))
-    .protocols(httpConf))
-    .assertions(global.responseTime.max.lessThan(maxResponseTime))
+  setUp(
+    scn.inject(rampUsers(users) over (usersOverSeconds seconds))
+  )
+  .protocols(httpConf)
+  .assertions(
+    global.responseTime.max.lessThan(maxResponseTime),
+    global.failedRequests.count.is(0)
+  )
 
 }
