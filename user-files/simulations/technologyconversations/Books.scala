@@ -30,13 +30,13 @@ class Books extends Simulation {
     .pause(2)
     .exec(
       http("books-get")
-        .get("http://localhost:8080/api/v1/books")
+        .get("/api/v1/books")
         .asJSON
     )
     .pause(2)
     .exec(
       http("books-get-by-id")
-        .get("http://localhost:8080/api/v1/books/_id/99999")
+        .get("/api/v1/books/_id/99999")
         .asJSON
     )
 
