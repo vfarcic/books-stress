@@ -17,7 +17,7 @@ class Books extends Simulation {
 
   val scn = scenario("books")
     .during(duration) {
-      .exec(
+      exec(
         http("books-post")
           .put("/api/v1/books")
           .body(StringBody(
