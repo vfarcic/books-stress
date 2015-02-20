@@ -6,5 +6,7 @@ sudo docker run -t --rm \
   -e "USERS=100" \
   -e "USERS_OVER_SECONDS=100" \
   -e "MAX_RESPONSE_TIME=1000" \
+  -e "DURATION=120" \
+  -v /data/stress/results:/stress/results \
   vfarcic/books-stress
 ```

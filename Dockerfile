@@ -12,6 +12,8 @@ ENV DOMAIN http://172.17.42.1
 ENV USERS 100
 ENV USERS_OVER_SECONDS 100
 ENV MAX_RESPONSE_TIME 1000
+ENV DURATION 120
+VOLUME ["/stress/results"]
 COPY bin /stress/bin
 COPY conf /stress/conf
 COPY lib /stress/lib
